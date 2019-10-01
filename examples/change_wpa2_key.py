@@ -2,7 +2,7 @@ from unipy import unipy
 import json, random, sys, requests
 
 # variables
-guest_wlan = 'the hex id _id you can get that from the unipy.get_wlansettings() function'
+guest_wlan = 'the hex id _id you can get that from this web address https://127.0.0.1:8443/api/s/default/rest/wlanconf/'
 url = 'https://127.0.0.1:8443'
 wordlist = 'words.txt'
 username = ''
