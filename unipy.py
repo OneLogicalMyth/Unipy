@@ -22,15 +22,23 @@ class unipy(object):
         return self.logged_in
 
     def get_dashboard(self):
-        if not self.logged_in:
-            return False
-        
         response = self.unifi.get(self.url + '/api/s/' + self.site + '/stat/dashboard', verify=False)
         return response.text
+
+    def get_wlansettings(self,wlan_id):
+        if not self.logged_in:
+            return False
+
+        response = self.unifi.get(self.url + '/api/s/' + self.site + '/rest/wlanconf/' + wlan_id, verify=False)
+        return response.json()
 
     def set_wlansettings_base(self,wlan_id,payload):
         if not self.logged_in:
             return False
 
         response = self.unifi.put(self.url + '/api/s/' + self.site + '/rest/wlanconf/' + wlan_id, json=payload, verify=False)
-        return response.text
+
+        if response.status_code == 200:
+            return True
+        else:
+            return False
